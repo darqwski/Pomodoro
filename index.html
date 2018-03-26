@@ -1,0 +1,137 @@
+<html DOCTYPE!>
+<head>
+ <title>Pomodoro v0.01</title>
+ <style>
+ *
+ {
+ text-align: center;
+ font-size: 120%;
+ }
+ .topButtons
+ {
+  background-color:#DDD;
+  width:28%;
+  height:17%;
+  padding:1%;
+  margin:1.3%;
+  float:left;
+ }
+ .bottomButtons
+ {
+   background-color:#DDD;
+  width:28%;
+  height:17%;
+  padding:1%;
+  margin:1.3%;
+  float:left;
+ }
+ #board
+ {
+background-color:#000;
+ width:50%;
+ height:55%;
+ margin-top:15%;
+ margin-left:25%;
+ }
+ #mainCounter
+ {
+ color:#FFF;
+ float:left;
+ border:2px solid black;
+ width:95%;
+ height:40%;
+ font-size:500%;
+ margin-top:3%;
+ margin-bottom:3%;
+ margin-left:2%;
+ }
+ </style>
+</head>
+
+<body>
+
+<div id="board">
+<div class="topButtons">POMODORO</div>
+<div class="topButtons">LONG BREAK</div>
+<div class="topButtons">SHORT BREAK</div>
+<div id="mainCounter">25:00:00</div>
+<div class="bottomButtons">START</div>
+<div class="bottomButtons">RESTART</div>
+<div class="bottomButtons">STOP</div>
+
+<script>
+var seconds=25*60*100;
+var saveSeconds;
+var intervalos;
+function refresh()
+{
+seconds--; 
+
+var minutes,newSeconds,miliseconds;
+if(seconds/6000<10)minutes="0"+parseInt(seconds/6000)
+else minutes=parseInt(seconds/6000)
+if((seconds%6000)/100<10)newSeconds="0"+parseInt(seconds%6000)/100
+else newSeconds=parseInt((seconds%6000)/100)
+if(seconds%100<10)miliseconds="0"+(seconds%100)
+else miliseconds=(seconds%100)
+document.getElementById("mainCounter").innerHTML=minutes+" : "+newSeconds+" : "+miliseconds ;
+if(seconds==0)
+{
+clearInterval(intervalos);
+var sound = new Audio("alarm.ogg");
+sound.play();
+
+}
+
+}
+document.getElementsByClassName("topButtons")[0].addEventListener("click", function(){
+    seconds=saveSeconds=25*60*100;refresh()
+});
+document.getElementsByClassName("topButtons")[1].addEventListener("click", function(){
+    seconds=saveSeconds=10*60*100;refresh()
+});
+document.getElementsByClassName("topButtons")[2].addEventListener("click", function(){
+    seconds=saveSeconds=5*60*100;refresh()
+	
+});
+document.getElementsByClassName("bottomButtons")[0].addEventListener("click", function(){
+    
+	intervalos=setInterval(function(){refresh()} , 10)
+});
+document.getElementsByClassName("bottomButtons")[1].addEventListener("click", function(){
+    
+	seconds=saveSeconds;
+});
+document.getElementsByClassName("bottomButtons")[2].addEventListener("click", function(){
+    
+	clearInterval(intervalos);
+});
+ 
+
+
+
+
+
+</script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
