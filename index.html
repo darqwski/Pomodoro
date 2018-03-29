@@ -1,136 +1,44 @@
 <html DOCTYPE!>
 <head>
  <title>Pomodoro v0.01</title>
- <style>
-
- *
- {
- text-align: center;
- font-size: 120%;
- }
- body
- {
-  background-color: #E8EAF6;
- }
- .buttons
- {
-  width:27%;
-  height:10%;
-  padding:1%;
-  padding-top:5%;
-  margin:2%;
-  float:left;
-  color:#EEE;
-  font-size:20px;
-  border-radius: 2%;
-  background-color: #3F51B5;
-  box-shadow: #999999 2px 2px;
-
- }
- .buttons:hover
- {
-  background-color: #7986CB;
- }
- .buttons:active
- {
-  background-color: #283593;
-
- }
- .buttonContainer
- {
-  width:100%;
- }
- #board
- {
-  background-color: #C5CAE9;
- width:50%;
- height:50%;
- margin-top:15%;
- margin-left:25%;
-
- }
- #mainCounter
- {
- color:rgba(0,0,0,.87);
- float:left;
- width:95%;
- height:40%;
- font-size:500%;
- margin-top:3%;
- margin-bottom:3%;
- margin-left:2%;
- }
- </style>
+<link rel="stylesheet" href="pomodoroStyle.css"/>
 </head>
 
 <body>
+<div class="grid-container">
+ <div class="grid-item"> </div>
+ <div class="grid-item"> </div>
+ <div class="grid-item"> </div>
+ <div class="grid-item"> </div>
+ <div class="grid-item"> </div>
+ <div class="grid-item"> </div>
+ <div class="board">
 
-<div id="board">
- <div class="buttonContainer">
-<div class="buttons">POMODORO</div>
-<div class="buttons">LONG BREAK</div>
-<div class="buttons">SHORT BREAK</div>
+   <div class="buttons">POMODORO</div>
+   <div class="buttons">LONG BREAK</div>
+   <div class="buttons">SHORT BREAK</div>
+
+  <div class="mainCounter">25:00:00</div>
+
+   <div class="buttons">START</div>
+   <div class="buttons">RESTART</div>
+   <div class="buttons">STOP</div>
+
  </div>
 
-<div id="mainCounter">25:00:00</div>
- <div class="buttonContainer">
- <div class="buttons">START</div>
-<div class="buttons">RESTART</div>
-<div class="buttons">STOP</div>
- </div>
- </div>
-
-<script>
-var seconds=25*60*100;
-var saveSeconds;
-var intervalClock;
-function refresh()
-{
-
-var minutes,newSeconds,miliseconds;
-minutes=((seconds/6000<10)?"0":"")+parseInt(seconds/6000)
-newSeconds=(((seconds%6000/100)<10)?"0":"")+parseInt(seconds%6000/100)
-miliseconds=((seconds%100<10)?"0":"")+(seconds%100)
-document.getElementById("mainCounter").innerHTML=minutes+":"+newSeconds+":"+miliseconds ;
-
-if(!seconds)
-{
-clearInterval(intervalClock);
-var sound = new Audio("alarm.ogg");
-sound.play();
-
-}
-    seconds--;
-}
-document.getElementsByClassName("buttons")[0].addEventListener("click", function(){
-    seconds=saveSeconds=25*60*100;refresh()
-});
-document.getElementsByClassName("buttons")[1].addEventListener("click", function(){
-    seconds=saveSeconds=10*60*100;refresh()
-});
-document.getElementsByClassName("buttons")[2].addEventListener("click", function(){
-    seconds=saveSeconds=5*60*100;refresh()
-	
-});
-document.getElementsByClassName("buttons")[3].addEventListener("click", function(){
-
-    intervalClock=setInterval(function(){refresh()} , 10)
-});
-document.getElementsByClassName("buttons")[4].addEventListener("click", function(){
-    
-	seconds=saveSeconds;
-});
-document.getElementsByClassName("buttons")[5].addEventListener("click", function(){
-    
-	clearInterval(intervalClock);
-});
- 
+ <div class="grid-item"> </div>
+ <div class="grid-item"> </div>
+ <div class="grid-item"> </div>
+ <div class="grid-item"> </div>
+ <div class="grid-item"> </div>
+ <div class="grid-item"> </div>
+</div>
 
 
 
 
 
-</script>
+<script src="timer.js"></script>
 </body>
 
 </html>
